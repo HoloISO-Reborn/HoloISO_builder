@@ -10,7 +10,7 @@ RUN useradd -m build && \
 USER build
 WORKDIR /home/build
 
-RUN git clone https://github.com/HoloISO/buildroot /home/build/buildroot
+RUN git clone https://github.com/HoloISO-Reborn/buildroot /home/build/buildroot
 RUN git clone https://github.com/HoloISO/postcopy -b beta /home/build/buildroot/postcopy_beta
 RUN chmod +x /home/build/buildroot/build.sh
 RUN echo "Builder Ready!"

@@ -10,8 +10,15 @@ RUN useradd -m build && \
 USER build
 WORKDIR /home/build
 
-RUN git clone https://github.com/HoloISO-Reborn/buildroot /home/build/buildroot
-RUN git clone https://github.com/HoloISO/postcopy -b beta /home/build/buildroot/postcopy_beta
+# Add a build argument to invalidate the cache
+ARG CACHE_BUST=1
+
+# Use the argument in the RUN commands to force uncaching
+RUN git clone https://github.com/HoloISO-Reborn/buildroot /home/build/buildroot && \
+    echo Cache bust: %CACHE_BUST%
+RUN git clone https://github.com/HoloISO/postcopy -b beta /home/build/buildroot/postcopy_beta && \
+    echo Cache bust: %CACHE_BUST%
+
 RUN chmod +x /home/build/buildroot/build.sh
 RUN echo "Builder Ready!"
 #COPY run.sh /run.sh

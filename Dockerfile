@@ -1,5 +1,7 @@
 FROM archlinux:base
 
+# Docker builder for holoiso, it basicaly setups base arch for archiso and buildroot building.
+
 RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm git bash sudo btrfs-progs archiso arch-install-scripts && \
     pacman -Scc --noconfirm

@@ -32,5 +32,6 @@ CMD [ \
     "--flavor", "beta", \
     "--snapshot_ver", "cos-v1", \
     "--workdir", "build", \
-    "--output-dir", "/mnt/out" \
+    "--output-dir", "/mnt/holoiso-images", \
+    "--add-release" \
 ]

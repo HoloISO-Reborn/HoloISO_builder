@@ -4,7 +4,7 @@ FROM archlinux:base
 # Docker builder for holoiso, it basicaly setups base arch for archiso and buildroot building.
 
 RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm git bash sudo btrfs-progs archiso arch-install-scripts && \
+    pacman -S --noconfirm git bash sudo btrfs-progs archiso arch-install-scripts grub && \
     pacman -Scc --noconfirm
 
 RUN useradd -m build && \
@@ -15,23 +15,28 @@ WORKDIR /home/build
 
 # Add a build argument to invalidate the cache
 ARG CACHE_BUST=1
+ARG BRANCH=""
+ARG SKIP_UPDATE_BUILD=0
+ARG SKIP_INSTALLER_BUILD=0
 
 # Use the argument in the RUN commands to force uncaching
 RUN git clone https://github.com/HoloISO-Reborn/buildroot /home/build/buildroot && \
-    echo Cache bust: %CACHE_BUST%
-RUN git clone https://github.com/HoloISO/postcopy -b beta /home/build/buildroot/postcopy_beta && \
-    echo Cache bust: %CACHE_BUST%
+    echo Cache bust: $CACHE_BUST
+RUN git clone https://github.com/HoloISO/postcopy -b $BRANCH /home/build/buildroot/postcopy_beta && \
+    echo Cache bust: $CACHE_BUST
 RUN git clone https://github.com/HoloISO-Reborn/installer-image-beta /home/build/installer-image-beta && \
-    echo Cache bust: %CACHE_BUST%
+    echo Cache bust: $CACHE_BUST
 
-RUN chmod +x /home/build/buildroot/build.sh
-RUN echo "Builder Ready!"
-#COPY run.sh /run.sh
-#RUN sudo chmod +x /run.sh
-
-#CMD ["/run.sh"]
+    
+RUN sudo chmod +x /home/build/buildroot/build.sh
+RUN sudo chmod +x /home/build/installer-image-beta/build.sh
+    
+RUN echo $BRANCH > /home/build/branch
+RUN echo $SKIP_UPDATE_BUILD > /home/build/skip_update_build
+RUN echo $SKIP_INSTALLER_BUILD > /home/build/skip_installer_build
 
 COPY entrypoint.sh /entrypoint.sh
 RUN sudo chmod +x /entrypoint.sh
 
+RUN echo "Builder Ready!"
 CMD ["/entrypoint.sh"]

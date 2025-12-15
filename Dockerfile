@@ -5,7 +5,8 @@ FROM archlinux:base
 
 RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm git bash sudo btrfs-progs archiso arch-install-scripts grub && \
-    pacman -Scc --noconfirm
+    pacman -Scc --noconfirm && \
+    echo "ILoveCandy" >> /etc/pacman.conf
 
 RUN useradd -m build && \
     echo "build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers

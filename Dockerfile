@@ -1,3 +1,4 @@
+# check=skip=JSONArgsRecommended
 FROM archlinux:base
 
 # Docker builder for holoiso, it basicaly setups base arch for archiso and buildroot building.
@@ -20,6 +21,8 @@ RUN git clone https://github.com/HoloISO-Reborn/buildroot /home/build/buildroot 
     echo Cache bust: %CACHE_BUST%
 RUN git clone https://github.com/HoloISO/postcopy -b beta /home/build/buildroot/postcopy_beta && \
     echo Cache bust: %CACHE_BUST%
+RUN git clone https://github.com/HoloISO-Reborn/installer-image-beta /home/build/installer-image-beta && \
+    echo Cache bust: %CACHE_BUST%
 
 RUN chmod +x /home/build/buildroot/build.sh
 RUN echo "Builder Ready!"
@@ -28,12 +31,7 @@ RUN echo "Builder Ready!"
 
 #CMD ["/run.sh"]
 
-CMD [ \
-    "sudo", \
-    "/home/build/buildroot/build.sh", \
-    "--flavor", "beta", \
-    "--snapshot_ver", "cos-v1", \
-    "--workdir", "build", \
-    "--output-dir", "/mnt/holoiso-images", \
-    "--add-release" \
-]
+COPY entrypoint.sh /entrypoint.sh
+RUN sudo chmod +x /entrypoint.sh
+
+CMD ["/entrypoint.sh"]

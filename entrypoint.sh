@@ -10,10 +10,8 @@ if [[ "$skip_update_build" != "1" ]]; then
         --flavor $branch \
         --snapshot-ver "cos-v1" \
         --workdir "build" \
-        --output-dir "/mnt/holoiso-images" \
+        --output-dir "/mnt/holoiso-images/$branch" \
         --add-release
-    mkdir -p /mnt/holoiso-images/holoiso-images/$branch
-    mv /mnt/holoiso-images/* /mnt/holoiso-images/holoiso-images/$branch/
 fi
 if [[ "$skip_installer_build" != "1" ]]; then
     sudo /home/build/installer-image-beta/build.sh \

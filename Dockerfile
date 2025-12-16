@@ -1,13 +1,10 @@
-# check=skip=FromPlatformFlagConstDisallowed
-# check=skip=JSONArgsRecommended
 FROM --platform=linux/amd64 archlinux:base
 
 # Docker builder for holoiso, it basicaly setups base arch for archiso and buildroot building.
 
 RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm git bash sudo btrfs-progs archiso arch-install-scripts git grub && \
-    pacman -Scc --noconfirm && \
-    echo "ILoveCandy" >> /etc/pacman.conf
+    pacman -Scc --noconfirm
 
 RUN useradd -m build && \
     echo "build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers

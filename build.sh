@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #TODO CHECK IF WORKS AS INTENDED WITH ARGS
-bak="""
 # HoloISO Builder Script
 # This script builds the Docker image and runs the HoloISO build process inside a container with the release metadata.
 
@@ -53,5 +52,3 @@ docker build --build-arg CACHE_BUST=$TIMESTAMP \
              -t holoiso-build .
 
 docker run -it -v "$OUTPUT_DIR:/mnt/holoiso-images" --privileged holoiso-build
-"""
-echo "Script not yet implemented in bash."

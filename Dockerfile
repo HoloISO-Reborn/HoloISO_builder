@@ -23,7 +23,7 @@ ARG SKIP_INSTALLER_BUILD=0
 # Use the argument in the RUN commands to force uncaching
 RUN git clone https://github.com/HoloISO-Reborn/buildroot /home/build/buildroot && \
     echo Cache bust: $CACHE_BUST
-RUN git clone https://github.com/HoloISO/postcopy -b $BRANCH /home/build/buildroot/postcopy_beta && \
+RUN git clone https://github.com/HoloISO-Reborn/postcopy -b $BRANCH /home/build/buildroot/postcopy_beta && \
     echo Cache bust: $CACHE_BUST
 RUN git clone https://github.com/HoloISO-Reborn/installer-image-beta /home/build/installer-image-beta && \
     echo Cache bust: $CACHE_BUST

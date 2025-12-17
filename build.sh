@@ -51,4 +51,4 @@ docker build --build-arg CACHE_BUST=$TIMESTAMP \
              --build-arg SKIP_INSTALLER_BUILD=$SKIP_INSTALLER_BUILD \
              -t holoiso-build .
 
-docker run -it -v "$OUTPUT_DIR:/mnt/holoiso-images" --privileged holoiso-build
+docker run -v "$OUTPUT_DIR:/mnt/holoiso-images" --privileged holoiso-build

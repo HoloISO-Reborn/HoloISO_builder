@@ -3,6 +3,7 @@
 branch=$(cat /home/build/branch)
 skip_update_build=$(cat /home/build/skip_update_build)
 skip_installer_build=$(cat /home/build/skip_installer_build)
+type=$(cat /home/build/type)
 
 if [[ "$skip_update_build" == "1" && "$skip_installer_build" == "1" ]]; then
     echo "Both build steps are skipped dummass."
@@ -10,7 +11,7 @@ if [[ "$skip_update_build" == "1" && "$skip_installer_build" == "1" ]]; then
 fi
 
 # if not /home/build/skip_update_build is 1, run the builder update script
-if [[ "$skip_update_build" != "1" && "$(cat /home/build/type)" != "online" ]]; then
+if [[ "$skip_update_build" != "1" && "$type" != "online" ]]; then
     sudo /home/build/buildroot/build.sh \
         --flavor $branch \
         --snapshot-ver "cos-v1" \

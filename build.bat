@@ -24,4 +24,6 @@ if "%BRANCH%"=="" (
 for /f "tokens=2 delims==" %%I in ('wmic os get localdatetime /value ^| find "="') do set TIMESTAMP=%%I
 docker build --build-arg CACHE_BUST=%TIMESTAMP% --build-arg BRANCH="%BRANCH%" --build-arg SKIP_UPDATE_BUILD=%SKIP_UPDATE_BUILD% --build-arg SKIP_INSTALLER_BUILD=%SKIP_INSTALLER_BUILD% --build-arg TYPE="%TYPE%" -t holoiso-build .
 docker run -it -v "%OUTPUT_DIR%:/mnt/holoiso-images" --privileged holoiso-build
+docker kill $(docker ps -q --filter ancestor=holoiso-build)
+docker rm $(docker ps -a -q --filter ancestor=holoiso-build)
 pause

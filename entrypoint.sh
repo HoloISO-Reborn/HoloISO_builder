@@ -19,6 +19,7 @@ if [[ "$skip_update_build" != "1" && "$type" != "online" ]]; then
         --output-dir "/mnt/holoiso-images/holoiso-images/$branch" \
         --add-release
 fi
+
 if [[ "$skip_installer_build" != "1" ]]; then
     sudo /home/build/installer-image-beta/build.sh \
         --branch $branch \

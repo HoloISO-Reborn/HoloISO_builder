@@ -4,6 +4,8 @@ REM This script builds the Docker image and runs the HoloISO build process insid
 set SKIP_UPDATE_BUILD=0
 set SKIP_INSTALLER_BUILD=0
 set OUTPUT_DIR=""
+set BRANCH=""
+set TYPE=""
 
 setlocal enabledelayedexpansion
 for %%A in (%*) do (
@@ -19,6 +21,9 @@ if %OUTPUT_DIR%=="" (
 )
 if "%BRANCH%"=="" (
     set BRANCH=beta
+)
+if "%TYPE%"=="" (
+    set TYPE=full
 )
 
 for /f "tokens=2 delims==" %%I in ('wmic os get localdatetime /value ^| find "="') do set TIMESTAMP=%%I

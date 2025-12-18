@@ -4,16 +4,15 @@ REM This script builds the Docker image and runs the HoloISO build process insid
 set SKIP_UPDATE_BUILD=0
 set SKIP_INSTALLER_BUILD=0
 set OUTPUT_DIR=""
-set BRANCH=""
-set TYPE=""
 
-setlocal enabledelayedexpansion
+REM FLAGS DONT WORK PROPERLY YET
+REM setlocal enabledelayedexpansion
 for %%A in (%*) do (
-    if "%%~A"=="--skip-update-build" set SKIP_UPDATE_BUILD=1
-    if "%%~A"=="--skip-installer-build" set SKIP_INSTALLER_BUILD=1
-    if "%%~A"=="--output" set OUTPUT_DIR=%%~B
-    if "%%~A"=="--branch" set BRANCH=%%~B
-    if "%%~A"=="--type" set TYPE=%%~B
+     if "%%~A"=="--skip-update-build" set SKIP_UPDATE_BUILD=1
+     if "%%~A"=="--skip-installer-build" set SKIP_INSTALLER_BUILD=1
+REM     if "%%~A"=="--output" set OUTPUT_DIR=%%~B
+REM     if "%%~A"=="--branch" set BRANCH=%%~B
+REM     if "%%~A"=="--type" set TYPE=%%~B
 )
 
 if %OUTPUT_DIR%=="" (
@@ -23,7 +22,7 @@ if "%BRANCH%"=="" (
     set BRANCH=beta
 )
 if "%TYPE%"=="" (
-    set TYPE=full
+    set TYPE=online
 )
 
 for /f "tokens=2 delims==" %%I in ('wmic os get localdatetime /value ^| find "="') do set TIMESTAMP=%%I

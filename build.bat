@@ -11,6 +11,7 @@ for %%A in (%*) do (
     if "%%~A"=="--skip-installer-build" set SKIP_INSTALLER_BUILD=1
     if "%%~A"=="--output" set OUTPUT_DIR=%%~B
     if "%%~A"=="--branch" set BRANCH=%%~B
+    if "%%~A"=="--type" set TYPE=%%~B
 )
 
 if %OUTPUT_DIR%=="" (
@@ -21,6 +22,6 @@ if "%BRANCH%"=="" (
 )
 
 for /f "tokens=2 delims==" %%I in ('wmic os get localdatetime /value ^| find "="') do set TIMESTAMP=%%I
-docker build --build-arg CACHE_BUST=%TIMESTAMP% --build-arg BRANCH="%BRANCH%" --build-arg SKIP_UPDATE_BUILD=%SKIP_UPDATE_BUILD% --build-arg SKIP_INSTALLER_BUILD=%SKIP_INSTALLER_BUILD% -t holoiso-build .
+docker build --build-arg CACHE_BUST=%TIMESTAMP% --build-arg BRANCH="%BRANCH%" --build-arg SKIP_UPDATE_BUILD=%SKIP_UPDATE_BUILD% --build-arg SKIP_INSTALLER_BUILD=%SKIP_INSTALLER_BUILD% --build-arg TYPE="%TYPE%" -t holoiso-build .
 docker run -it -v "%OUTPUT_DIR%:/mnt/holoiso-images" --privileged holoiso-build
 pause

@@ -29,6 +29,11 @@ while [[ "$#" -gt 0 ]]; do
             shift
             shift
             ;;
+        --type)
+            TYPE="$2"
+            shift
+            shift
+            ;;
         *)
             shift
             ;;
@@ -49,6 +54,7 @@ docker build --build-arg CACHE_BUST=$TIMESTAMP \
              --build-arg BRANCH="$BRANCH" \
              --build-arg SKIP_UPDATE_BUILD=$SKIP_UPDATE_BUILD \
              --build-arg SKIP_INSTALLER_BUILD=$SKIP_INSTALLER_BUILD \
+             --build-arg TYPE="$TYPE" \
              -t holoiso-build .
 
 docker run -v "$OUTPUT_DIR:/mnt/holoiso-images" --privileged holoiso-build

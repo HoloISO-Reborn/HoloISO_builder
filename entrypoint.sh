@@ -8,8 +8,9 @@ if [[ "$skip_update_build" == "1" && "$skip_installer_build" == "1" ]]; then
     echo "Both build steps are skipped dummass."
     exit 0
 fi
+
 # if not /home/build/skip_update_build is 1, run the builder update script
-if [[ "$skip_update_build" != "1" ]]; then
+if [[ "$skip_update_build" != "1" && "$(cat /home/build/type)" != "online" ]]; then
     sudo /home/build/buildroot/build.sh \
         --flavor $branch \
         --snapshot-ver "cos-v1" \
@@ -22,5 +23,6 @@ if [[ "$skip_installer_build" != "1" ]]; then
         --branch $branch \
         --output-dir "/mnt/holoiso-images/holoiso-installer/$branch" \
         --offline \
-        --images "/mnt/holoiso-images/holoiso-images/$branch"
+        --images "/mnt/holoiso-images/holoiso-images/$branch" \
+        --type "$(cat /home/build/type)"
 fi

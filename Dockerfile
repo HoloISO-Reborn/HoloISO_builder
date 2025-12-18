@@ -17,6 +17,7 @@ ARG CACHE_BUST=1
 ARG BRANCH=""
 ARG SKIP_UPDATE_BUILD=0
 ARG SKIP_INSTALLER_BUILD=0
+ARG TYPE="full"
 
 # Use the argument in the RUN commands to force uncaching
 RUN git clone https://github.com/HoloISO-Reborn/buildroot /home/build/buildroot && \
@@ -33,6 +34,7 @@ RUN sudo chmod +x /home/build/installer-image-beta/build.sh
 RUN echo $BRANCH > /home/build/branch
 RUN echo $SKIP_UPDATE_BUILD > /home/build/skip_update_build
 RUN echo $SKIP_INSTALLER_BUILD > /home/build/skip_installer_build
+RUN echo $TYPE > /home/build/type
 
 COPY entrypoint.sh /entrypoint.sh
 RUN sudo chmod +x /entrypoint.sh

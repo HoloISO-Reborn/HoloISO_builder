@@ -57,6 +57,4 @@ docker build --build-arg CACHE_BUST=$TIMESTAMP \
              --build-arg TYPE="$TYPE" \
              -t holoiso-build .
 
-docker run -v "$OUTPUT_DIR:/mnt/holoiso-images" --privileged holoiso-build
-docker kill $(docker ps -q --filter ancestor=holoiso-build)
-docker rm $(docker ps -a -q --filter ancestor=holoiso-build)
+docker run -v "$OUTPUT_DIR:/mnt/holoiso-images" --rm --privileged holoiso-build

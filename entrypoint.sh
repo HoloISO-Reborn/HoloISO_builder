@@ -14,7 +14,7 @@ fi
 if [[ "$skip_update_build" != "1" ]]; then
     sudo /home/build/buildroot/build.sh \
         --flavor $branch \
-        --snapshot-ver "cos-v1" \
+        --snapshot-ver "holoiso-reborn" \
         --workdir "build" \
         --output-dir "/mnt/holoiso-images/holoiso-images/$branch" \
         --add-release

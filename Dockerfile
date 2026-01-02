@@ -1,3 +1,4 @@
+# check=skip=FromPlatformFlagConstDisallowed
 FROM --platform=linux/amd64 archlinux:base
 
 # Docker builder for holoiso, it basicaly setups base arch for archiso and buildroot building.

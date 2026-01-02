@@ -26,5 +26,5 @@ if [[ "$skip_installer_build" != "1" ]]; then
         --output-dir "/mnt/holoiso-images/holoiso-installer/$branch" \
         --offline \
         --images "/mnt/holoiso-images/holoiso-images/$branch" \
-        --type "$(cat /home/build/type)"
+        --type "$type"
 fi

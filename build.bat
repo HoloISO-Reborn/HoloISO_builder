@@ -6,10 +6,10 @@ set SKIP_INSTALLER_BUILD=0
 set OUTPUT_DIR=""
 
 REM FLAGS DONT WORK PROPERLY YET
-REM setlocal enabledelayedexpansion
+setlocal enabledelayedexpansion
 for %%A in (%*) do (
-     if "%%~A"=="--skip-update-build" set SKIP_UPDATE_BUILD=1
-     if "%%~A"=="--skip-installer-build" set SKIP_INSTALLER_BUILD=1
+    if "%%~A"=="--skip-update-build" set SKIP_UPDATE_BUILD=1
+    if "%%~A"=="--skip-installer-build" set SKIP_INSTALLER_BUILD=1
 REM     if "%%~A"=="--output" set OUTPUT_DIR=%%~B
 REM     if "%%~A"=="--branch" set BRANCH=%%~B
 REM     if "%%~A"=="--type" set TYPE=%%~B
